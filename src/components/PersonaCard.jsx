@@ -1,8 +1,3 @@
-// PersonaCard.jsx
-// Renders a single investor persona with their attack text and defense input.
-// Phase 2: shows streaming text as it arrives token by token.
-// Phase 3: shows score + reasoning after defense is submitted.
-
 import DefenseInput from './DefenseInput'
 
 const COLOR_MAP = {
@@ -14,22 +9,13 @@ const COLOR_MAP = {
 }
 
 export default function PersonaCard({
-  persona,
-  attackText,     // string | null — full attack (done streaming)
-  streamingText,  // string | null — in-progress streaming text
-  isLoading,      // bool — waiting for first token
-  isScoring,      // bool — scoring API call in progress
-  score,          // number | null — defense score 0-20
-  reasoning,      // string | null — why this score
-  onDefend,
-  pitchSubmitted,
+  persona, attackText, streamingText, isLoading,
+  isScoring, score, reasoning, onDefend, pitchSubmitted,
 }) {
   const accentColor = COLOR_MAP[persona.color] || 'var(--text-secondary)'
-
-  // What to show in the attack body
   const displayText = attackText ?? streamingText
-  const showSkeleton  = isLoading && !streamingText
-  const showEmpty     = !pitchSubmitted
+  const showSkeleton = isLoading && !streamingText
+  const showEmpty = !pitchSubmitted
 
   return (
     <div
@@ -38,79 +24,68 @@ export default function PersonaCard({
     >
       {/* Header */}
       <div className="persona-card-header">
-        <span className="persona-emoji" aria-hidden="true">{persona.emoji}</span>
-        <div>
-          <p className="persona-name">{persona.name}</p>
-          <p className="persona-role">{persona.role}</p>
+        <div className="persona-header-left">
+          <div className="persona-emoji-wrap">{persona.emoji}</div>
+          <div>
+            <div className="persona-name">{persona.name}</div>
+            <div className="persona-role">{persona.title}</div>
+            <div className="persona-org">{persona.org}</div>
+          </div>
         </div>
 
-        {/* Score badge */}
+        {/* Score */}
         {isScoring && (
-          <span className="persona-score" style={{ marginLeft: 'auto', opacity: 0.5 }}>
-            scoring...
-          </span>
+          <div className="persona-score-wrap">
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)' }}>
+              scoring...
+            </span>
+          </div>
         )}
         {!isScoring && score !== null && score !== undefined && (
-          <span
-            className="persona-score"
-            style={{ marginLeft: 'auto', color: accentColor }}
-            title={reasoning ?? ''}
-          >
-            {score}/20
-          </span>
+          <div className="persona-score-wrap">
+            <div className="persona-score" style={{ color: accentColor }}>{score}</div>
+            <div className="persona-score-sub">/20</div>
+          </div>
         )}
       </div>
 
       {/* Tagline */}
       <p className="persona-tagline">"{persona.tagline}"</p>
 
-      {/* Attack body */}
-      {showEmpty && (
-        <p className="persona-attack empty">Waiting for your pitch...</p>
-      )}
+      {/* Attack */}
+      {showEmpty && <p className="persona-attack empty">Waiting for your pitch...</p>}
 
       {showSkeleton && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <div className="skeleton" style={{ height: 12, width: '90%' }} />
-          <div className="skeleton" style={{ height: 12, width: '75%' }} />
-          <div className="skeleton" style={{ height: 12, width: '82%' }} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <div className="skeleton" style={{ height: 11, width: '92%' }} />
+          <div className="skeleton" style={{ height: 11, width: '78%' }} />
+          <div className="skeleton" style={{ height: 11, width: '85%' }} />
+          <div className="skeleton" style={{ height: 11, width: '60%' }} />
         </div>
       )}
 
       {displayText && (
         <p className="persona-attack">
           {displayText}
-          {/* Blinking cursor while streaming */}
           {streamingText && !attackText && (
             <span style={{
-              display: 'inline-block',
-              width: 2,
-              height: '1em',
-              background: accentColor,
-              marginLeft: 2,
+              display: 'inline-block', width: 2, height: '1em',
+              background: accentColor, marginLeft: 2,
               verticalAlign: 'text-bottom',
-              animation: 'pulse 0.8s ease-in-out infinite',
+              animation: 'pulse 0.7s ease-in-out infinite',
             }} />
           )}
         </p>
       )}
 
-      {/* Score reasoning — shows below the attack once scored */}
+      {/* Reasoning */}
       {reasoning && (
-        <p style={{
-          fontSize: 11,
-          color: accentColor,
-          fontFamily: 'var(--font-mono)',
-          borderLeft: `2px solid ${accentColor}`,
-          paddingLeft: 8,
-          opacity: 0.8,
-          lineHeight: 1.4,
-        }}>
+        <p className="persona-reasoning" style={{ color: accentColor }}>
           {reasoning}
         </p>
       )}
 
-      {/* Defense input — only after attacked */}
+      {/* Defense */}
       {pitchSubmitted && (
         <DefenseInput
           personaId={persona.id}
