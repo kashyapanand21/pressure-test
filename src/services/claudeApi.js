@@ -8,8 +8,9 @@ const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const MODEL = 'llama-3.3-70b-versatile'
 
 function getApiKey() {
-    const key = import.meta.env.VITE_GROQ_API_KEY
-    if (!key) throw new Error('Missing VITE_GROQ_API_KEY in .env file')
+    // Check localStorage first (set via Settings UI), then fall back to .env
+    const key = localStorage.getItem('pt_groq_key') || import.meta.env.VITE_GROQ_API_KEY
+    if (!key) throw new Error('No Groq API key found. Add it in Settings or set VITE_GROQ_API_KEY in .env')
     return key
 }
 
@@ -54,7 +55,6 @@ export async function attackAllPersonas(pitchText, onPersonaReady, onChunk) {
             // Simulate word-by-word streaming for visual effect
             const words = text.split(' ')
             for (let i = 0; i < words.length; i++) {
-                // Faster at start, slight pause at punctuation for dramatic effect
                 const word = words[i]
                 const delay = word.endsWith('.') || word.endsWith('?') || word.endsWith('—')
                     ? 180
@@ -115,7 +115,6 @@ Score this defense strictly.`
         const score = Math.min(20, Math.max(0, Math.round(Number(parsed.score))))
         return { score, reasoning: parsed.reasoning ?? '' }
     } catch {
-        // If JSON parsing fails, try to extract just a number from the response
         return { score: 10, reasoning: 'Could not parse score.' }
     }
 }

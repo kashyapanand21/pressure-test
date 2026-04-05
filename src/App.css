@@ -166,3 +166,476 @@ html, body, #root { min-height: 100vh; background: var(--bg); color: var(--text-
 @keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:1} }
 @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 .fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* ── History View ─────────────────────────────────────────── */
+.empty-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 8px;
+  margin-top: 24px;
+}
+.empty-history-icon {
+  font-size: 48px;
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+.empty-history-title {
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4);
+  margin: 0 0 8px;
+}
+.empty-history-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.25);
+  max-width: 360px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.history-full-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+.history-full-card {
+  display: flex;
+  gap: 32px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 24px 28px;
+}
+.history-full-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+.history-full-session {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+}
+.history-full-date {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.05em;
+}
+.history-full-score {
+  font-family: 'Courier New', monospace;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 4px 0;
+}
+.history-full-denom {
+  font-size: 16px;
+  opacity: 0.5;
+}
+.history-full-pitch {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+.history-pitch-label {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+}
+.history-pitch-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ── Methodology View ─────────────────────────────────────── */
+.methodology-header {
+  margin-bottom: 32px;
+}
+.methodology-title {
+  font-family: 'Courier New', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #fff;
+  margin: 8px 0 12px;
+}
+.methodology-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0;
+}
+
+.scoring-bands-section {
+  margin-bottom: 40px;
+}
+.scoring-bands-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.band-card {
+  padding: 18px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+.band-range {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.band-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.4;
+}
+
+.persona-methodology-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.persona-method-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+.persona-method-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.persona-method-icon { font-size: 22px; }
+.persona-method-name {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+.persona-method-role {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.persona-method-attack {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+  margin-bottom: 8px;
+  padding-left: 4px;
+  border-left: 2px solid rgba(255,255,255,0.15);
+  padding-left: 12px;
+}
+.persona-method-focus {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+
+/* ── Settings View ────────────────────────────────────────── */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  max-width: 520px;
+}
+.settings-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+.settings-card-title {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 16px;
+}
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px;
+}
+.settings-row:last-child { border-bottom: none; }
+.settings-key { color: rgba(255,255,255,0.4); }
+.settings-val { color: rgba(255,255,255,0.8); font-family: 'Courier New', monospace; }
+
+
+/* ── Settings editable additions ─────────────────────────── */
+.settings-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.settings-card-header .settings-card-title {
+  margin-bottom: 0;
+}
+.settings-edit-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.settings-edit-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.85);
+}
+.settings-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 200px;
+}
+.settings-input:focus {
+  border-color: rgba(255,255,255,0.4);
+}
+.settings-input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.settings-input-key {
+  width: 260px;
+  letter-spacing: 0.05em;
+}
+.settings-key-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.settings-show-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.settings-show-btn:hover {
+  color: rgba(255,255,255,0.7);
+  border-color: rgba(255,255,255,0.25);
+}
+.settings-row-col {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.settings-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  font-style: italic;
+}
+.settings-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+.settings-cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.45);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.settings-save-btn {
+  background: #ef4444;
+  border: none;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.settings-save-btn:hover { background: #dc2626; }
+.settings-saved {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #22c55e;
+  letter-spacing: 0.08em;
+}
+
+/* ── Demo Banner ──────────────────────────────────────────── */
+.demo-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.3);
+  transition: background 0.3s;
+}
+.demo-banner--active {
+  background: rgba(234, 179, 8, 0.06);
+  border-bottom-color: rgba(234, 179, 8, 0.2);
+  color: rgba(234, 179, 8, 0.8);
+}
+.demo-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-banner-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.3s;
+}
+.demo-banner--active .demo-banner-dot {
+  background: #eab308;
+  box-shadow: 0 0 6px #eab308;
+}
+.demo-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.demo-toggle-btn--on {
+  border-color: rgba(234, 179, 8, 0.4);
+  color: #eab308;
+}
+.demo-toggle-track {
+  display: inline-flex;
+  width: 28px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  align-items: center;
+  padding: 2px;
+  transition: background 0.2s;
+}
+.demo-toggle-btn--on .demo-toggle-track {
+  background: rgba(234, 179, 8, 0.3);
+}
+.demo-toggle-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+.demo-toggle-btn--on .demo-toggle-thumb {
+  transform: translateX(14px);
+  background: #eab308;
+}
+
+.copy-pitch-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-top: 8px;
+}
+.copy-pitch-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+.copy-pitch-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 5px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.copy-pitch-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+
+.share-score-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.45);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.share-score-btn:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
